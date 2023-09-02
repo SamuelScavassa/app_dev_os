@@ -1,4 +1,7 @@
+import 'package:app_init/Widgets/about_dev_content.dart';
+import 'package:app_init/Widgets/about_us_content.dart';
 import 'package:app_init/Widgets/install_apps_content.dart';
+import 'package:app_init/Widgets/sign_us_content.dart';
 import 'package:flutter/material.dart';
 
 class menuLateral extends StatefulWidget {
@@ -13,6 +16,24 @@ class _menuLateralState extends State<menuLateral> {
   void install() {
     setState(() {
       conteudo = InstallAppsContent();
+    });
+  }
+
+  void about() {
+    setState(() {
+      conteudo = AboutUsContent();
+    });
+  }
+
+  void dev() {
+    setState(() {
+      conteudo = AppAndProjectInfoContent();
+    });
+  }
+
+  void sign() {
+    setState(() {
+      conteudo = ContactDevelopersContent();
     });
   }
 
@@ -45,24 +66,24 @@ class _menuLateralState extends State<menuLateral> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: install, child: Text('About DEV OS')),
+                          onPressed: dev, child: Text('About DEV OS')),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: install, child: Text('    About Us    ')),
+                          onPressed: about, child: Text('    About Us    ')),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: install, child: Text('     Sign Us     ')),
+                          onPressed: sign, child: Text('     Sign Us     ')),
                     ),
                   ],
                 ),
               ),
             ),
           ),
-          Flexible(flex: 2, child: conteudo),
+          Flexible(flex: 5, child: conteudo),
         ],
       ),
     );

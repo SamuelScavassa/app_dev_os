@@ -1,4 +1,3 @@
-import 'package:app_init/Widgets/install_apps_content.dart';
 import 'package:app_init/Widgets/menu.dart';
 import 'package:flutter/material.dart';
 
