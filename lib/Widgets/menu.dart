@@ -4,6 +4,8 @@ import 'package:app_init/Widgets/install_apps_content.dart';
 import 'package:app_init/Widgets/sign_us_content.dart';
 import 'package:flutter/material.dart';
 
+import 'home_content.dart';
+
 class menuLateral extends StatefulWidget {
   const menuLateral({super.key});
 
@@ -12,7 +14,7 @@ class menuLateral extends StatefulWidget {
 }
 
 class _menuLateralState extends State<menuLateral> {
-  Widget conteudo = Text('AA');
+  Widget conteudo = HomeContent();
   void install() {
     setState(() {
       conteudo = InstallAppsContent();
@@ -54,7 +56,14 @@ class _menuLateralState extends State<menuLateral> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("Menu"),
+                    GestureDetector(
+                      onTap: () => {
+                        setState(() {
+                          conteudo = HomeContent();
+                        }),
+                      },
+                      child: Text("Home"),
+                    ),
                     SizedBox(
                       height: 20,
                     ),
