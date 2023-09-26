@@ -18,7 +18,7 @@ class _AboutUsContentState extends State<AboutUsContent> {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: const Padding(
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,26 +32,22 @@ class _AboutUsContentState extends State<AboutUsContent> {
             ),
             SizedBox(height: 16),
             Text(
-              "Somos uma equipe dedicada de desenvolvedores Flutter que adora criar aplicativos incríveis para nossos usuários. Nossa missão é fornecer soluções inovadoras e de alta qualidade que melhorem a vida das pessoas.",
+              " Olá, me chamo Samuel Melegatti Scavassa tenho 20 anos e este é meu Trabalho de conclusão de curso para "
+              "minha graduação em análise e desenvolvimento de sistemas. Adoro Tecnologia de todas as formas, amo programar "
+              "e fazer exeperiências na área. \n"
+              " Nesse contexto, adoro softwares de código aberto e toda sua filosofia de compartilhar o conhecimento. Com isso em mente,"
+              " escolhi desenvolver este projeto.",
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 16),
-            Text(
-              "Entre em Contato",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            Container(
+              alignment: AlignmentDirectional.center,
+              child: Image.asset(
+                'images/img.jpg',
+                width: 200,
+                height: 200,
               ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              "Email: contato@exemplo.com",
-              style: TextStyle(fontSize: 16),
-            ),
-            Text(
-              "Telefone: (123) 456-7890",
-              style: TextStyle(fontSize: 16),
-            ),
+            )
           ],
         ),
       ),

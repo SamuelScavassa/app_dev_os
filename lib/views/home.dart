@@ -14,8 +14,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Center(child: Text('Welcome to DEV-OS')),
+          title: const Center(child: Text('Bem vindo ao DEV-OS')),
         ),
-        body: menuLateral());
+        body: const menuLateral());
   }
 }

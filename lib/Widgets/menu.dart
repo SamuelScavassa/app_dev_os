@@ -56,6 +56,7 @@ class _menuLateralState extends State<menuLateral> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Image.asset('images/icon.png'),
                     GestureDetector(
                       onTap: () => {
                         setState(() {
@@ -70,22 +71,22 @@ class _menuLateralState extends State<menuLateral> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: install, child: Text(' Install  Apps  ')),
+                          onPressed: install, child: Text(' Instalar  Apps  ')),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: dev, child: Text('About DEV OS')),
+                          onPressed: dev, child: Text('Sobre DEV OS')),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: about, child: Text('    About Us    ')),
+                          onPressed: about, child: Text('    Sobre nós    ')),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: sign, child: Text('     Sign Us     ')),
+                          onPressed: sign, child: Text('     Nos siga     ')),
                     ),
                   ],
                 ),
