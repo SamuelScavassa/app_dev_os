@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class App {
   final String name;
   final String description;
-  final IconData icon;
+  final String img;
 
-  App(this.name, this.description, this.icon);
+  App(this.name, this.description, this.img);
 }
 
 class InstallAppsContent extends StatefulWidget {
@@ -17,9 +17,24 @@ class InstallAppsContent extends StatefulWidget {
 
 class _InstallAppsContentState extends State<InstallAppsContent> {
   final List<App> apps = [
-    App("Flutter", "", Icons.apps),
-    App("Ruby", "", Icons.apps),
-    App("Dotnet", "", Icons.apps),
+    App("Flutter", "Instale o Framework Flutter via snap",
+        'images/logos/flutter.png'),
+    App(
+        "Ruby",
+        "Instale a linguegem Ruby, juntamente com o Framework Ruby on Rails",
+        'images/logos/ruby.png'),
+    App("C++", "Instale o compilador C++ CMake", 'images/logos/c++.png'),
+    App("PHP", "Instale ....", 'images/logos/php.png'),
+    App("Swift", "Instale ....", 'images/logos/swift.png'),
+    App("Kotlin", "Instale ....", 'images/logos/kotlin.png'),
+    App("Rust", "Instale ....", 'images/logos/rust.png'),
+    App("Go", "Instale ....", 'images/logos/go.png'),
+    App("Android Studio", "Instale ....", 'images/logos/as.png'),
+    App("Pycharm Community", "Instale ....", 'images/logos/pycharm.png'),
+    App("Postman", "Instale ....", 'images/logos/postman.png'),
+    App("DBeaver", "Instale ....", 'images/logos/dbeaver.png'),
+    App("SQL Lite Browser", "Instale ....", 'images/logos/sqllite.png'),
+    App("Docker", "Instale ....", 'images/logos/docker.png'),
   ];
 
   @override
@@ -28,9 +43,10 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
       itemCount: apps.length,
       itemBuilder: (context, index) {
         return ListTile(
-          leading: Icon(
-            apps[index].icon,
-            color: Colors.white,
+          leading: Image.asset(
+            apps[index].img,
+            height: 40,
+            width: 40, // Carregue a imagem usando Image.asset
           ),
           title: Text(
             apps[index].name,

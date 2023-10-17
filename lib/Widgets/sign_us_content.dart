@@ -26,7 +26,7 @@ class _ContactDevelopersContentState extends State<ContactDevelopersContent> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(
-          "Sign Us",
+          "Me siga 🏃‍♂️",
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -36,7 +36,7 @@ class _ContactDevelopersContentState extends State<ContactDevelopersContent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Contate os Desenvolvedores",
+              "Contate o Desenvolvedor",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -44,7 +44,7 @@ class _ContactDevelopersContentState extends State<ContactDevelopersContent> {
             ),
             SizedBox(height: 16),
             Text(
-              "Se você tiver alguma dúvida, feedback ou precisar de suporte, não hesite em entrar em contato com nossa equipe de desenvolvedores.",
+              "Se você tiver alguma dúvida, feedback ou precisar de suporte, não hesite em entrar em contato comigo 🙂",
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 24),

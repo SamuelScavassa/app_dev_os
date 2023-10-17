@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  carousel_slider:
   flutter:
     sdk: flutter
 
@@ -63,6 +64,24 @@ flutter:
   assets:
     - images/img.jpg
     - images/icon.png
+    - images/1.png
+    - images/2.png
+    - images/3.png
+    - images/logos/as.png
+    - images/logos/c++.png
+    - images/logos/flutter.png
+    - images/logos/go.png
+    - images/logos/kotlin.png
+    - images/logos/php.png
+    - images/logos/ruby.png
+    - images/logos/rust.png
+    - images/logos/swift.png
+    - images/logos/dbeaver.png
+    - images/logos/docker.png
+    - images/logos/pycharm.png
+    - images/logos/postman.png
+    - images/logos/sqllite.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

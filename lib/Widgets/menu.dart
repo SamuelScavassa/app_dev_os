@@ -71,7 +71,7 @@ class _menuLateralState extends State<menuLateral> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: install, child: Text(' Instalar  Apps  ')),
+                          onPressed: install, child: Text('Instalar Tools')),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -81,12 +81,12 @@ class _menuLateralState extends State<menuLateral> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: about, child: Text('    Sobre nós    ')),
+                          onPressed: about, child: Text('    Sobre mim    ')),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: sign, child: Text('     Nos siga     ')),
+                          onPressed: sign, child: Text('     Me siga     ')),
                     ),
                   ],
                 ),
