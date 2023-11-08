@@ -1,4 +1,4 @@
-import 'package:app_init/views/home.dart';
+import 'package:dev_os/views/home.dart';
 import 'package:flutter/material.dart';
 
 import 'Themes/appTheme.dart';

@@ -1,7 +1,7 @@
-import 'package:app_init/Widgets/about_dev_content.dart';
-import 'package:app_init/Widgets/about_us_content.dart';
-import 'package:app_init/Widgets/install_apps_content.dart';
-import 'package:app_init/Widgets/sign_us_content.dart';
+import 'package:dev_os/Widgets/about_dev_content.dart';
+import 'package:dev_os/Widgets/about_us_content.dart';
+import 'package:dev_os/Widgets/install_apps_content.dart';
+import 'package:dev_os/Widgets/sign_us_content.dart';
 import 'package:flutter/material.dart';
 
 import 'home_content.dart';

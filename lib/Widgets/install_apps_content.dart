@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../controllers/run_script.dart';
+
 class App {
   final String name;
   final String description;
   final String img;
+  final String path_script;
 
-  App(this.name, this.description, this.img);
+  App(this.name, this.description, this.img, this.path_script);
 }
 
 class InstallAppsContent extends StatefulWidget {
@@ -18,23 +21,33 @@ class InstallAppsContent extends StatefulWidget {
 class _InstallAppsContentState extends State<InstallAppsContent> {
   final List<App> apps = [
     App("Flutter", "Instale o Framework Flutter via snap",
-        'images/logos/flutter.png'),
+        'images/logos/flutter.png', 'scripts/flutter.sh'),
     App(
         "Ruby",
         "Instale a linguegem Ruby, juntamente com o Framework Ruby on Rails",
-        'images/logos/ruby.png'),
-    App("C++", "Instale o compilador C++ CMake", 'images/logos/c++.png'),
-    App("PHP", "Instale ....", 'images/logos/php.png'),
-    App("Swift", "Instale ....", 'images/logos/swift.png'),
-    App("Kotlin", "Instale ....", 'images/logos/kotlin.png'),
-    App("Rust", "Instale ....", 'images/logos/rust.png'),
-    App("Go", "Instale ....", 'images/logos/go.png'),
-    App("Android Studio", "Instale ....", 'images/logos/as.png'),
-    App("Pycharm Community", "Instale ....", 'images/logos/pycharm.png'),
-    App("Postman", "Instale ....", 'images/logos/postman.png'),
-    App("DBeaver", "Instale ....", 'images/logos/dbeaver.png'),
-    App("SQL Lite Browser", "Instale ....", 'images/logos/sqllite.png'),
-    App("Docker", "Instale ....", 'images/logos/docker.png'),
+        'images/logos/ruby.png',
+        'scripts/flutter.sh'),
+    App("C++", "Instale o compilador C++ CMake", 'images/logos/c++.png',
+        'scripts/flutter.sh'),
+    App("PHP", "Instale ....", 'images/logos/php.png', 'scripts/flutter.sh'),
+    App("Swift", "Instale ....", 'images/logos/swift.png',
+        'scripts/flutter.sh'),
+    App("Kotlin", "Instale ....", 'images/logos/kotlin.png',
+        'scripts/flutter.sh'),
+    App("Rust", "Instale ....", 'images/logos/rust.png', 'scripts/flutter.sh'),
+    App("Go", "Instale ....", 'images/logos/go.png', 'scripts/flutter.sh'),
+    App("Android Studio", "Instale ....", 'images/logos/as.png',
+        'scripts/flutter.sh'),
+    App("Pycharm Community", "Instale ....", 'images/logos/pycharm.png',
+        'scripts/flutter.sh'),
+    App("Postman", "Instale ....", 'images/logos/postman.png',
+        'scripts/flutter.sh'),
+    App("DBeaver", "Instale ....", 'images/logos/dbeaver.png',
+        'scripts/flutter.sh'),
+    App("SQL Lite Browser", "Instale ....", 'images/logos/sqllite.png',
+        'scripts/flutter.sh'),
+    App("Docker", "Instale ....", 'images/logos/docker.png',
+        'scripts/flutter.sh'),
   ];
 
   @override
@@ -56,6 +69,7 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
           trailing: ElevatedButton(
             onPressed: () {
               // Adicione aqui a lógica para iniciar a instalação do aplicativo
+              runScriptWithSudo(apps[index].path_script);
               showDialog(
                 context: context,
                 builder: (context) {

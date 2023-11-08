@@ -1,4 +1,4 @@
-import 'package:app_init/Widgets/menu.dart';
+import 'package:dev_os/Widgets/menu.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
