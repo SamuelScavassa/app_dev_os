@@ -2,9 +2,9 @@ import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+var varr = 'Instalando ...';
 Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
   TextEditingController senhaController = TextEditingController();
-
   await showDialog(
     context: context,
     builder: (context) {
@@ -26,7 +26,6 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
           ),
           TextButton(
             onPressed: () async {
-              var varr = 'Instalando ...';
               Navigator.of(context).pop();
               showDialog(
                 context: context,
@@ -45,30 +44,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                   );
                 },
               );
-
-              try {
-                await executeScript(scriptPath, senhaController.text, context);
-                varr = 'Instalado com sucesso';
-              } catch (e) {
-                Navigator.of(context).pop();
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Erro"),
-                      content: Text("Erro"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("Fechar"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }
+              await executeScript(scriptPath, senhaController.text, context);
             },
             child: Text("OK"),
           ),
@@ -78,7 +54,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
   );
 }
 
-Future<int> executeScript(
+Future<void> executeScript(
     String scriptPath, String senha, BuildContext context) async {
   String command = 'echo $senha | sudo -S $scriptPath';
 
@@ -90,5 +66,10 @@ Future<int> executeScript(
 
   int exitCode = await process.exitCode;
 
-  return exitCode;
+  if (exitCode == 0) {
+    
+    varr = 'Instalado com sucesso';
+  } else {
+    varr = 'Erro ao instalar';
+  }
 }
