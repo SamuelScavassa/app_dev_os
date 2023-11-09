@@ -45,11 +45,10 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                   );
                 },
               );
-              try {
-                executeScript(scriptPath, senhaController.text, context);
-              } catch (e) {
-                print(e);
-              } finally {
+
+              var res =
+                  executeScript(scriptPath, senhaController.text, context);
+              if (res == 0) {
                 await Future.delayed(const Duration(seconds: 1));
                 if (!context.mounted) return;
                 Navigator.of(context).pop();
@@ -70,6 +69,10 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                     );
                   },
                 );
+              } else {
+                await Future.delayed(const Duration(seconds: 1));
+                if (!context.mounted) return;
+                Navigator.of(context).pop();
               }
             },
             child: Text("OK"),
@@ -80,7 +83,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
   );
 }
 
-Future<void> executeScript(
+Future<int> executeScript(
     String scriptPath, String senha, BuildContext context) async {
   String command = 'echo $senha | sudo -S $scriptPath';
 
@@ -91,5 +94,5 @@ Future<void> executeScript(
   );
 
   int exitCode = await process.exitCode;
-  print(exitCode);
+  return (exitCode);
 }
