@@ -69,24 +69,8 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
           trailing: ElevatedButton(
             onPressed: () {
               // Adicione aqui a lógica para iniciar a instalação do aplicativo
-              runScriptWithSudo(apps[index].path_script);
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text("Instalação"),
-                    content: Text("Instalando ${apps[index].name}..."),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text("Fechar"),
-                      ),
-                    ],
-                  );
-                },
-              );
+              runScriptWithSudo(apps[index].path_script, context);
+
             },
             child: Text("Instalar"),
           ),
