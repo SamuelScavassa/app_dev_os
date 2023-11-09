@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-var varr = 'Instalando ...';
 Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
   TextEditingController senhaController = TextEditingController();
   await showDialog(
@@ -32,7 +31,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                 builder: (context) {
                   return AlertDialog(
                     title: Text("Instalação"),
-                    content: Text("$varr"),
+                    content: Text("Instalando..."),
                     actions: [
                       TextButton(
                         onPressed: () {
@@ -44,7 +43,31 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                   );
                 },
               );
-              await executeScript(scriptPath, senhaController.text, context);
+              try {
+                await executeScript(scriptPath, senhaController.text, context);
+              } catch (e) {
+                Navigator.of(context).pop();
+                print(e);
+              } finally {
+                Navigator.of(context).pop();
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text("Instalação"),
+                      content: Text("Instalado com sucesso"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("Fechar"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
             child: Text("OK"),
           ),
@@ -65,11 +88,5 @@ Future<void> executeScript(
   );
 
   int exitCode = await process.exitCode;
-
-  if (exitCode == 0) {
-    
-    varr = 'Instalado com sucesso';
-  } else {
-    varr = 'Erro ao instalar';
-  }
+  print(exitCode);
 }
