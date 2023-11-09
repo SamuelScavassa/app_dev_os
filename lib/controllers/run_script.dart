@@ -27,11 +27,48 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
           TextButton(
             onPressed: () async {
               Navigator.of(context).pop();
-
-              var ret = await executeScript(
-                  scriptPath, senhaController.text, context);
-
-              resposta(ret, context);
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Instalação"),
+                    content: Text("$varr"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Fechar"),
+                      ),
+                    ],
+                  );
+                },
+              );
+              var varr;
+              try {
+                await executeScript(scriptPath, senhaController.text, context);
+              } catch (e) {
+                Navigator.of(context).pop();
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text("Erro"),
+                      content: Text("Erro"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("Fechar"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } finally {
+                varr = 'Instalado com sucesso';
+              }
             },
             child: Text("OK"),
           ),
@@ -41,60 +78,17 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
   );
 }
 
-dynamic resposta(int ret, BuildContext context) {
-  if (ret != 0) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("Erro"),
-          content: Text("Erro"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Fechar"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-  return showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text("Instalação"),
-        content: Text("Instalado com sucesso"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text("Fechar"),
-          ),
-        ],
-      );
-    },
-  );
-}
-
 Future<int> executeScript(
     String scriptPath, String senha, BuildContext context) async {
-  try {
-    String command = 'echo $senha | sudo -S $scriptPath';
+  String command = 'echo $senha | sudo -S $scriptPath';
 
-    Process process = await Process.start(
-      'bash',
-      ['-c', command],
-      mode: ProcessStartMode.inheritStdio,
-    );
+  Process process = await Process.start(
+    'bash',
+    ['-c', command],
+    mode: ProcessStartMode.inheritStdio,
+  );
 
-    int exitCode = await process.exitCode;
+  int exitCode = await process.exitCode;
 
-    return exitCode;
-  } catch (e) {
-    return 99;
-  }
+  return exitCode;
 }
