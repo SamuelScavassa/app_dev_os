@@ -46,32 +46,9 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                 },
               );
 
-              var res = await executeScript(
+              await executeScript(
                   scriptPath, senhaController.text, context);
 
-              Navigator.of(context).pop();
-
-              if (res == 0) {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Instalação"),
-                      content: Text("Instalado com sucesso"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("Fechar"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
-                print('aaaaaaaa');
-              }
             },
             child: Text("OK"),
           ),
