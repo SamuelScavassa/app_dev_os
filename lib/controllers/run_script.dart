@@ -26,7 +26,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
           ),
           TextButton(
             onPressed: () async {
-              var varr;
+              var varr = 'Instalando ...';
               Navigator.of(context).pop();
               showDialog(
                 context: context,
@@ -48,6 +48,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
 
               try {
                 await executeScript(scriptPath, senhaController.text, context);
+                varr = 'Instalado com sucesso';
               } catch (e) {
                 Navigator.of(context).pop();
                 showDialog(
@@ -67,8 +68,6 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                     );
                   },
                 );
-              } finally {
-                varr = 'Instalado com sucesso';
               }
             },
             child: Text("OK"),
