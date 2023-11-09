@@ -48,10 +48,10 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
 
               var res = await executeScript(
                   scriptPath, senhaController.text, context);
+
+              Navigator.of(context).pop();
+
               if (res == 0) {
-                await Future.delayed(const Duration(seconds: 1));
-                if (!context.mounted) return;
-                Navigator.of(context).pop();
                 showDialog(
                   context: context,
                   builder: (context) {
@@ -70,9 +70,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                   },
                 );
               } else {
-                await Future.delayed(const Duration(seconds: 1));
-                if (!context.mounted) return;
-                Navigator.of(context).pop();
+                print('aaaaaaaa');
               }
             },
             child: Text("OK"),
