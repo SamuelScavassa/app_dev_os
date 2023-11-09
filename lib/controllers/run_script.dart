@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -44,11 +46,12 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                 },
               );
               try {
-                await executeScript(scriptPath, senhaController.text, context);
+                executeScript(scriptPath, senhaController.text, context);
               } catch (e) {
-                Navigator.of(context).pop();
                 print(e);
               } finally {
+                await Future.delayed(const Duration(seconds: 1));
+                if (!context.mounted) return;
                 Navigator.of(context).pop();
                 showDialog(
                   context: context,
