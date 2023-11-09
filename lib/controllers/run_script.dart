@@ -46,10 +46,11 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                 },
               );
 
-              var res =
-                  executeScript(scriptPath, senhaController.text, context);
+              var res = await executeScript(
+                  scriptPath, senhaController.text, context);
               if (res == 0) {
-                
+                await Future.delayed(const Duration(seconds: 1));
+                if (!context.mounted) return;
                 Navigator.of(context).pop();
                 showDialog(
                   context: context,
@@ -93,5 +94,6 @@ Future<int> executeScript(
   );
 
   int exitCode = await process.exitCode;
+  print(exitCode);
   return (exitCode);
 }
