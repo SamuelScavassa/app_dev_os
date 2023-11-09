@@ -26,6 +26,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
           ),
           TextButton(
             onPressed: () async {
+              var varr;
               Navigator.of(context).pop();
               showDialog(
                 context: context,
@@ -44,7 +45,7 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
                   );
                 },
               );
-              var varr;
+
               try {
                 await executeScript(scriptPath, senhaController.text, context);
               } catch (e) {
