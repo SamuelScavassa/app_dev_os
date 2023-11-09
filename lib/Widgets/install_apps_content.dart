@@ -21,15 +21,15 @@ class InstallAppsContent extends StatefulWidget {
 class _InstallAppsContentState extends State<InstallAppsContent> {
   final List<App> apps = [
     App("Flutter", "Instale o Framework Flutter via snap",
-        'images/logos/flutter.png', 'scripts/flutter.sh'),
+        'images/logos/flutter.png', 'snap install -y snap'),
     App(
         "Ruby",
         "Instale a linguegem Ruby, juntamente com o Framework Ruby on Rails",
         'images/logos/ruby.png',
-        'scripts/flutter.sh'),
+        'apt install -y ruby'),
     App("C++", "Instale o compilador C++ CMake", 'images/logos/c++.png',
-        'scripts/flutter.sh'),
-    App("PHP", "Instale ....", 'images/logos/php.png', 'scripts/flutter.sh'),
+        'apt install -y cmake'),
+    App("PHP", "Instale ....", 'images/logos/php.png', 'apt install -y php'),
     App("Swift", "Instale ....", 'images/logos/swift.png',
         'scripts/flutter.sh'),
     App("Kotlin", "Instale ....", 'images/logos/kotlin.png',

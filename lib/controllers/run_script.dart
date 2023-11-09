@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
@@ -28,46 +27,11 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
           TextButton(
             onPressed: () async {
               Navigator.of(context).pop();
-              try {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Instalação"),
-                      content: Text("Instalando..."),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("Fechar"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-                await executeScript(scriptPath, senhaController.text, context);
-              } catch (e) {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Erro"),
-                      content: Text("Erro $e"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("Fechar"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } finally {
-                Navigator.of(context).pop();
-              }
+
+              var ret = await executeScript(
+                  scriptPath, senhaController.text, context);
+
+              resposta(ret, context);
             },
             child: Text("OK"),
           ),
@@ -77,7 +41,46 @@ Future<void> runScriptWithSudo(String scriptPath, BuildContext context) async {
   );
 }
 
-Future<void> executeScript(
+dynamic resposta(int ret, BuildContext context) {
+  if (ret != 0) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Erro"),
+          content: Text("Erro"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Fechar"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Instalação"),
+        content: Text("Instalado com sucesso"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Fechar"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<int> executeScript(
     String scriptPath, String senha, BuildContext context) async {
   try {
     String command = 'echo $senha | sudo -S $scriptPath';
@@ -90,8 +93,8 @@ Future<void> executeScript(
 
     int exitCode = await process.exitCode;
 
-    print('Script executado com código de saída: $exitCode');
+    return exitCode;
   } catch (e) {
-    print('Erro ao executar o script: $e');
+    return 99;
   }
 }
