@@ -82,12 +82,13 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
 
                           var x = await executeScript(
                               apps[index].path_script, senhaController.text);
-                          if (x == 0) {
-                            setState(() {
+                              
+                          if (x) {
+                             setState(() {
                               varr = 'Sucesso';
                             });
                           } else {
-                            setState(() {
+                             setState(() {
                               varr = 'Erro';
                             });
                           }
