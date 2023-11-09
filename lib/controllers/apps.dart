@@ -1,0 +1,32 @@
+import '../Widgets/install_apps_content.dart';
+
+final List<App> apps = [
+    App("Flutter", "Instale o Framework Flutter via snap",
+        'images/logos/flutter.png', 'snap install -y snap'),
+    App(
+        "Ruby",
+        "Instale a linguegem Ruby, juntamente com o Framework Ruby on Rails",
+        'images/logos/ruby.png',
+        'apt install -y ruby'),
+    App("C++", "Instale o compilador C++ CMake", 'images/logos/c++.png',
+        'apt install -y cmake'),
+    App("PHP", "Instale ....", 'images/logos/php.png', 'apt install -y php'),
+    App("Swift", "Instale ....", 'images/logos/swift.png',
+        'scripts/flutter.sh'),
+    App("Kotlin", "Instale ....", 'images/logos/kotlin.png',
+        'scripts/flutter.sh'),
+    App("Rust", "Instale ....", 'images/logos/rust.png', 'scripts/flutter.sh'),
+    App("Go", "Instale ....", 'images/logos/go.png', 'scripts/flutter.sh'),
+    App("Android Studio", "Instale ....", 'images/logos/as.png',
+        'scripts/flutter.sh'),
+    App("Pycharm Community", "Instale ....", 'images/logos/pycharm.png',
+        'scripts/flutter.sh'),
+    App("Postman", "Instale ....", 'images/logos/postman.png',
+        'scripts/flutter.sh'),
+    App("DBeaver", "Instale ....", 'images/logos/dbeaver.png',
+        'scripts/flutter.sh'),
+    App("SQL Lite Browser", "Instale ....", 'images/logos/sqllite.png',
+        'scripts/flutter.sh'),
+    App("Docker", "Instale ....", 'images/logos/docker.png',
+        'scripts/flutter.sh'),
+  ];
