@@ -1,9 +1,7 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:io';
 import 'dart:async';
 
-Future<void> executeScript(String scriptPath, String senha) async {
+Future<dynamic> executeScript(String scriptPath, String senha) async {
   String command = 'echo $senha | sudo -S $scriptPath';
 
   Process process = await Process.start(
@@ -12,5 +10,9 @@ Future<void> executeScript(String scriptPath, String senha) async {
     mode: ProcessStartMode.inheritStdio,
   );
 
-  process.kill();
+  if (await process.exitCode == 0) {
+    return process.exitCode;
+  } else {
+    return Null;
+  }
 }
