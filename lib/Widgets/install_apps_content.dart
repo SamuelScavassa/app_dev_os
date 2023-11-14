@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../controllers/apps.dart';
-import '../controllers/run_script.dart';
 
-var varr = 'Instalando...';
 
 class App {
   final String name;
@@ -22,18 +20,59 @@ class InstallAppsContent extends StatefulWidget {
 }
 
 class _InstallAppsContentState extends State<InstallAppsContent> {
-  void test(String e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          behavior: SnackBarBehavior.floating,
-          elevation: 150.0,
-          content: Text('$e')),
-    );
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
     TextEditingController senhaController = TextEditingController();
+Future<dynamic> a(String scriptPath, String senha) async {
+  String command = 'echo $senha | sudo -S $scriptPath && exit';
+  
+  Process process = await Process.start(
+    'bash',
+    ['-c', command],
+    mode: ProcessStartMode.inheritStdio,
+    
+  );
+
+  var xx = await process.exitCode;
+  process.kill();
+  if (xx != 0) {
+    return Exception();
+  }
+  return null;
+}
+    
+void navSucesso() {
+  Navigator.of(context).pop();
+  ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            behavior: SnackBarBehavior.floating,
+            elevation: 150.0,
+            content: Text('Sucesso ao instalar')),
+      );
+}
+void navErro() {
+  Navigator.of(context).pop();
+  ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            behavior: SnackBarBehavior.floating,
+            elevation: 150.0,
+            content: Text('Erro ao instalar')),
+      );
+}
+
+    void executeScript(String scriptPath, String senha) async {
+  
+  try {
+    await a(scriptPath, senha);
+    navSucesso();
+     }
+  catch(e) {
+    navErro();
+  } 
+    
+}
+
     return ListView.builder(
       itemCount: apps.length,
       itemBuilder: (context, index) {
@@ -50,9 +89,7 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
           subtitle: Text(apps[index].description),
           trailing: ElevatedButton(
             onPressed: () {
-              // Adicione aqui a lógica para iniciar a instalação do aplicativo
-
-              showDialog(
+           showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
@@ -79,21 +116,22 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
                             builder: (context) {
                               return AlertDialog(
                                 title: Text("Instalação"),
-                                content: Text("$varr"),
+                                content: Text("Instalando...."),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
-                                      aaaaa(apps[index].path_script,
-                                          senhaController.text);
+                                      
+                                      Navigator.of(context).pop();
                                     },
-                                    child: Text("Fechar"),
+                                    child: Text("Voltar"),
                                   ),
                                 ],
                               );
                             },
                           );
-                          executeScript(context, apps[index].path_script,
-                              senhaController.text);
+                          executeScript(apps[index].path_script,
+                                          senhaController.text);
+                      
                         },
                         child: Text("OK"),
                       ),
@@ -107,30 +145,5 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
         );
       },
     );
-  }
-
-  Future<dynamic> aaaaa(String scriptPath, String senha) async {
-    String command = 'echo $senha | sudo -S $scriptPath && exit';
-    var currentContext = context;
-    Process process = await Process.start(
-      'bash',
-      ['-c', command],
-      mode: ProcessStartMode.inheritStdio,
-    );
-
-    var xx = await process.exitCode;
-    process.kill();
-    if (xx != 0) {
-      if (currentContext == context) {
-        setState(() {
-          varr = 'sucesso!';
-        });
-      }
-    }
-    if (currentContext == context) {
-      setState(() {
-        varr = 'Dados carregados com sucesso!';
-      });
-    }
   }
 }
