@@ -1,7 +1,8 @@
+
 import 'package:flutter/material.dart';
 import '../controllers/apps.dart';
 import '../controllers/run_script.dart';
-
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 class App {
   final String name;
   final String description;
@@ -19,8 +20,19 @@ class InstallAppsContent extends StatefulWidget {
 }
 
 class _InstallAppsContentState extends State<InstallAppsContent> {
+
+    void test(String e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            behavior: SnackBarBehavior.floating,
+            elevation: 150.0,
+            content: Text('$e')),
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
+    key: _scaffoldKey;
     TextEditingController senhaController = TextEditingController();
     return ListView.builder(
       itemCount: apps.length,
@@ -79,18 +91,9 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
                               );
                             },
                           );
-
-                          try {
-                            await executeScript(
+                          executeScript(context,
                                 apps[index].path_script, senhaController.text);
-                            setState(() {
-                              varr = 'Sucesso';
-                            });
-                          } catch (e) {
-                            setState(() {
-                              varr = 'Erro';
-                            });
-                          }
+                          
                         },
                         child: Text("OK"),
                       ),

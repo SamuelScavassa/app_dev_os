@@ -1,4 +1,5 @@
 import 'package:dev_os/views/home.dart';
+import 'package:dev_os/views/sucesso.dart';
 import 'package:flutter/material.dart';
 
 import 'Themes/appTheme.dart';
@@ -17,6 +18,7 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       theme: tema(),
       routes: {
+        '/sucesso':(context) => sucesso(),
         '/home': (context) => Home(),
       },
       initialRoute: '/home',
