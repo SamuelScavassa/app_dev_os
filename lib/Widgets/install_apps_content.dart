@@ -1,8 +1,10 @@
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../controllers/apps.dart';
 import '../controllers/run_script.dart';
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+var varr = 'Instalando...';
+
 class App {
   final String name;
   final String description;
@@ -20,19 +22,17 @@ class InstallAppsContent extends StatefulWidget {
 }
 
 class _InstallAppsContentState extends State<InstallAppsContent> {
-
-    void test(String e) {
+  void test(String e) {
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            behavior: SnackBarBehavior.floating,
-            elevation: 150.0,
-            content: Text('$e')),
-      );
+      SnackBar(
+          behavior: SnackBarBehavior.floating,
+          elevation: 150.0,
+          content: Text('$e')),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    key: _scaffoldKey;
     TextEditingController senhaController = TextEditingController();
     return ListView.builder(
       itemCount: apps.length,
@@ -51,7 +51,7 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
           trailing: ElevatedButton(
             onPressed: () {
               // Adicione aqui a lógica para iniciar a instalação do aplicativo
-              var varr = 'Instalando...';
+
               showDialog(
                 context: context,
                 builder: (context) {
@@ -83,7 +83,8 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
                                 actions: [
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                      aaaaa(apps[index].path_script,
+                                          senhaController.text);
                                     },
                                     child: Text("Fechar"),
                                   ),
@@ -91,9 +92,8 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
                               );
                             },
                           );
-                          executeScript(context,
-                                apps[index].path_script, senhaController.text);
-                          
+                          executeScript(context, apps[index].path_script,
+                              senhaController.text);
                         },
                         child: Text("OK"),
                       ),
@@ -107,5 +107,30 @@ class _InstallAppsContentState extends State<InstallAppsContent> {
         );
       },
     );
+  }
+
+  Future<dynamic> aaaaa(String scriptPath, String senha) async {
+    String command = 'echo $senha | sudo -S $scriptPath && exit';
+    var currentContext = context;
+    Process process = await Process.start(
+      'bash',
+      ['-c', command],
+      mode: ProcessStartMode.inheritStdio,
+    );
+
+    var xx = await process.exitCode;
+    process.kill();
+    if (xx != 0) {
+      if (currentContext == context) {
+        setState(() {
+          varr = 'sucesso!';
+        });
+      }
+    }
+    if (currentContext == context) {
+      setState(() {
+        varr = 'Dados carregados com sucesso!';
+      });
+    }
   }
 }
