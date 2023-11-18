@@ -43,9 +43,9 @@ class _AboutUsContentState extends State<AboutUsContent> {
               Container(
                 alignment: AlignmentDirectional.center,
                 child: Image.asset(
-                  'images/img.jpg',
-                  width: 200,
-                  height: 200,
+                  'images/img.gif',
+                  width: 400,
+                  height: 400,
                 ),
               )
             ],

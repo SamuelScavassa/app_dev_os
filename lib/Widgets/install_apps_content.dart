@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../controllers/apps.dart';
 
-
 class App {
   final String name;
   final String description;
@@ -16,62 +15,58 @@ class InstallAppsContent extends StatefulWidget {
   const InstallAppsContent({super.key});
 
   @override
-  State<InstallAppsContent> createState() => _InstallAppsContentState();
+  State<InstallAppsContent> createState() => _InstallAppsContentState(); 
 }
 
 class _InstallAppsContentState extends State<InstallAppsContent> {
- 
   @override
   Widget build(BuildContext context) {
     TextEditingController senhaController = TextEditingController();
-Future<dynamic> a(String scriptPath, String senha) async {
-  String command = 'echo $senha | sudo -S $scriptPath && exit';
-  
-  Process process = await Process.start(
-    'bash',
-    ['-c', command],
-    mode: ProcessStartMode.inheritStdio,
-    
-  );
+    Future<dynamic> a(String scriptPath, String senha) async {
+      String command = 'echo $senha | sudo -S $scriptPath';
 
-  var xx = await process.exitCode;
-  process.kill();
-  if (xx != 0) {
-    return Exception();
-  }
-  return null;
-}
-    
-void navSucesso() {
-  Navigator.of(context).pop();
-  ScaffoldMessenger.of(context).showSnackBar(
+      Process process = await Process.start(
+        'bash',
+        ['-c', command],
+        mode: ProcessStartMode.inheritStdio,
+      );
+
+      var xx = await process.exitCode;
+      process.kill();
+      if (xx != 0) {
+        return Exception();
+      }
+      return null;
+    }
+
+    void navSucesso() {
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             behavior: SnackBarBehavior.floating,
             elevation: 150.0,
             content: Text('Sucesso ao instalar')),
       );
-}
-void navErro() {
-  Navigator.of(context).pop();
-  ScaffoldMessenger.of(context).showSnackBar(
+    }
+
+    void navErro() {
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             behavior: SnackBarBehavior.floating,
             elevation: 150.0,
             content: Text('Erro ao instalar')),
       );
-}
+    }
 
     void executeScript(String scriptPath, String senha) async {
-  
-  try {
-    await a(scriptPath, senha);
-    navSucesso();
-     }
-  catch(e) {
-    navErro();
-  } 
-    
-}
+      try {
+        await a(scriptPath, senha);
+        navSucesso();
+      } catch (e) {
+        navErro();
+      }
+    }
 
     return ListView.builder(
       itemCount: apps.length,
@@ -89,7 +84,7 @@ void navErro() {
           subtitle: Text(apps[index].description),
           trailing: ElevatedButton(
             onPressed: () {
-           showDialog(
+              showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
@@ -120,7 +115,6 @@ void navErro() {
                                 actions: [
                                   TextButton(
                                     onPressed: () {
-                                      
                                       Navigator.of(context).pop();
                                     },
                                     child: Text("Voltar"),
@@ -129,9 +123,8 @@ void navErro() {
                               );
                             },
                           );
-                          executeScript(apps[index].path_script,
-                                          senhaController.text);
-                      
+                          executeScript(
+                              apps[index].path_script, senhaController.text);
                         },
                         child: Text("OK"),
                       ),
